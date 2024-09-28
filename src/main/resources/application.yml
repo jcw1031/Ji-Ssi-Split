@@ -1,0 +1,34 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+    import:
+      - classpath:secrets/application-common.yml
+      - classpath:secrets/application-local.yml
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: develop
+    import:
+      - classpath:secrets/application-common.yml
+      - classpath:secrets/application-dev.yml
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: production
+    import:
+      - classpath:secrets/application-common.yml
+      - classpath:secrets/application-prod.yml
+
+---
+
+spring:
+  config:
+    import:
+      - logging.yml
