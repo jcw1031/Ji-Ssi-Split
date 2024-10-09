@@ -31,4 +31,4 @@ spring:
 spring:
   config:
     import:
-      - logging.yml
+      - logback/logging.yml
