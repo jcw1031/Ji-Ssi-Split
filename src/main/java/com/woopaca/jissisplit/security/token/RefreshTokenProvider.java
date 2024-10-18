@@ -1,7 +1,7 @@
 package com.woopaca.jissisplit.security.token;
 
-import com.woopaca.jissisplit.redis.RedisKeyValueRepository;
-import com.woopaca.jissisplit.user.entity.User;
+import com.woopaca.jissisplit.redis.RedisRepository;
+import com.woopaca.jissisplit.user.User;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -15,9 +15,9 @@ public class RefreshTokenProvider {
 
     public static final Duration DEFAULT_VALID_DURATION = Duration.ofDays(14);
 
-    private final RedisKeyValueRepository keyValueRepository;
+    private final RedisRepository keyValueRepository;
 
-    public RefreshTokenProvider(RedisKeyValueRepository keyValueRepository) {
+    public RefreshTokenProvider(RedisRepository keyValueRepository) {
         this.keyValueRepository = keyValueRepository;
     }
 

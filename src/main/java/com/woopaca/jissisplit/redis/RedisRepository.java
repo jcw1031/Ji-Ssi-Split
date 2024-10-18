@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 
 @Profile("!test")
 @Repository
-public class RedisKeyValueRepository {
+public class RedisRepository {
 
     private final RedisTemplate<String, String> redisTemplate;
 
-    public RedisKeyValueRepository(RedisTemplate<String, String> redisTemplate) {
+    public RedisRepository(RedisTemplate<String, String> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
