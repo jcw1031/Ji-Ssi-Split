@@ -1,54 +1,20 @@
 package com.woopaca.jissisplit.common.error;
 
 import lombok.Getter;
+import org.springframework.http.HttpStatus;
 
 @Getter
 public enum ErrorType {
 
-    COORDINATE_OUT_OF_RANGE("", ErrorHttpStatus.BAD_REQUEST),
-    INVALID_MAP_RANGE("", ErrorHttpStatus.BAD_REQUEST),
+    ALREADY_OWNED_STOCK("", HttpStatus.BAD_REQUEST),
 
-    NONEXISTENT_PARTY("", ErrorHttpStatus.NOT_FOUND),
-    NONEXISTENT_USER("", ErrorHttpStatus.NOT_FOUND),
-
-    PARTICIPANTS_COUNT("", ErrorHttpStatus.BAD_REQUEST),
-    PARTICIPATION_LIMIT("", ErrorHttpStatus.BAD_REQUEST),
-
-    TITLE_TOO_LONG("", ErrorHttpStatus.BAD_REQUEST),
-    EXPLANATION_TOO_LONG("", ErrorHttpStatus.BAD_REQUEST),
-    NONEXISTENT_ADDRESS("", ErrorHttpStatus.BAD_REQUEST),
-    PAST_DEPARTURE_TIME("", ErrorHttpStatus.BAD_REQUEST),
-
-    PARTY_ALREADY_ENDED("", ErrorHttpStatus.BAD_REQUEST),
-    PARTY_ALREADY_PARTICIPATED("", ErrorHttpStatus.BAD_REQUEST),
-    PARTICIPANTS_FULL("", ErrorHttpStatus.BAD_REQUEST),
-    NOT_PARTICIPATED_PARTY("", ErrorHttpStatus.BAD_REQUEST),
-
-    MESSAGE_TOO_LONG("", ErrorHttpStatus.BAD_REQUEST),
-
-    INVALID_REFRESH_TOKEN("", ErrorHttpStatus.UNAUTHORIZED);
+    INVALID_REFRESH_TOKEN("", HttpStatus.UNAUTHORIZED);
 
     private final String errorCode;
-    private final ErrorHttpStatus errorHttpStatus;
+    private final HttpStatus httpStatus;
 
-    ErrorType(String errorCode, ErrorHttpStatus errorHttpStatus) {
+    ErrorType(String errorCode, HttpStatus httpStatus) {
         this.errorCode = errorCode;
-        this.errorHttpStatus = errorHttpStatus;
-    }
-
-    @Getter
-    public enum ErrorHttpStatus {
-
-        BAD_REQUEST(400, "Bad Request"),
-        UNAUTHORIZED(401, "Unauthorized"),
-        NOT_FOUND(404, "Not Found");
-
-        private final int value;
-        private final String reasonPhrase;
-
-        ErrorHttpStatus(int value, String reasonPhrase) {
-            this.value = value;
-            this.reasonPhrase = reasonPhrase;
-        }
+        this.httpStatus = httpStatus;
     }
 }
