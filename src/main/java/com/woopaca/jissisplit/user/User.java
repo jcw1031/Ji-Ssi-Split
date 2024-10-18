@@ -1,6 +1,7 @@
-package com.woopaca.jissisplit.user.entity;
+package com.woopaca.jissisplit.user;
 
 import com.woopaca.jissisplit.security.auth.oauth2.KakaoUser;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,6 +9,7 @@ import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -28,6 +30,17 @@ public class User {
 
     private String appSecret;
 
+    @Column(columnDefinition = "CHAR(8)")
+    private String accountNumber;
+
+    @Column(columnDefinition = "CHAR(2)")
+    private String accountProductCode;
+
+    private BigDecimal balance;
+
+    public User() {
+    }
+
     @Builder
     public User(String email, String name, LocalDateTime registeredAt, String appKey, String appSecret) {
         this.email = email;
@@ -35,9 +48,6 @@ public class User {
         this.registeredAt = registeredAt;
         this.appKey = appKey;
         this.appSecret = appSecret;
-    }
-
-    public User() {
     }
 
     public static User fromOAuth2User(KakaoUser kakaoUser) {

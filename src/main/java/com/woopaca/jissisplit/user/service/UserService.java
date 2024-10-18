@@ -1,7 +1,7 @@
 package com.woopaca.jissisplit.user.service;
 
 import com.woopaca.jissisplit.security.auth.oauth2.KakaoUser;
-import com.woopaca.jissisplit.user.entity.User;
+import com.woopaca.jissisplit.user.User;
 import com.woopaca.jissisplit.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

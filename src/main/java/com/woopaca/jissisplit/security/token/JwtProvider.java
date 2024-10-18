@@ -3,7 +3,7 @@ package com.woopaca.jissisplit.security.token;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.woopaca.jissisplit.user.entity.User;
+import com.woopaca.jissisplit.user.User;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;

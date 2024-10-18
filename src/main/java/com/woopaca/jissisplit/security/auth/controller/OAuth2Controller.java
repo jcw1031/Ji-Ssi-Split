@@ -7,7 +7,7 @@ import com.woopaca.jissisplit.security.auth.oauth2.KakaoUser;
 import com.woopaca.jissisplit.security.auth.service.AuthService;
 import com.woopaca.jissisplit.security.auth.service.KakaoOAuth2Service;
 import com.woopaca.jissisplit.security.auth.utils.RefreshTokenCookies;
-import com.woopaca.jissisplit.user.entity.User;
+import com.woopaca.jissisplit.user.User;
 import com.woopaca.jissisplit.user.service.UserService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;

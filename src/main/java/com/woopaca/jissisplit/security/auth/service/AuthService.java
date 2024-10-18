@@ -4,7 +4,7 @@ import com.woopaca.jissisplit.common.error.exception.InvalidRefreshTokenExceptio
 import com.woopaca.jissisplit.security.auth.model.Tokens;
 import com.woopaca.jissisplit.security.token.JwtProvider;
 import com.woopaca.jissisplit.security.token.RefreshTokenProvider;
-import com.woopaca.jissisplit.user.entity.User;
+import com.woopaca.jissisplit.user.User;
 import com.woopaca.jissisplit.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
