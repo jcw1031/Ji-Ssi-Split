@@ -16,25 +16,25 @@ import java.math.RoundingMode;
 @Slf4j
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-public class StockPriceMessageListener implements MessageListener {
+public class StockTradeProcessor implements MessageListener {
 
     private final ObjectMapper objectMapper;
 
     private BigDecimal maxPrice;
-    private BigDecimal purchasePrice;
+    private BigDecimal buyPrice;
     private BigDecimal activationThreshold;
     private BigDecimal trailingStopRate;
     private BigDecimal dipRate;
-    private BigDecimal purchaseAmount;
+    private BigDecimal buyAmount;
 
-    public StockPriceMessageListener(ObjectMapper objectMapper) {
+    public StockTradeProcessor(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
         this.maxPrice = BigDecimal.ZERO;
-        this.purchasePrice = BigDecimal.ZERO;
+        this.buyPrice = BigDecimal.ZERO;
         this.activationThreshold = BigDecimal.valueOf(1.0);
         this.trailingStopRate = BigDecimal.valueOf(0.3);
         this.dipRate = BigDecimal.valueOf(1.0);
-        this.purchaseAmount = BigDecimal.valueOf(1_000.00);
+        this.buyAmount = BigDecimal.valueOf(1_000.00);
     }
 
     @Override
@@ -42,17 +42,17 @@ public class StockPriceMessageListener implements MessageListener {
         try {
             StockPriceResponse body = objectMapper.readValue(message.getBody(), StockPriceResponse.class);
             BigDecimal stockPrice = body.stockPrice();
-            if (purchasePrice.equals(BigDecimal.ZERO)) {
-                purchasePrice = stockPrice;
+            if (buyPrice.equals(BigDecimal.ZERO)) {
+                buyPrice = stockPrice;
             }
 
-            if (isLessThan(purchasePrice, stockPrice)) { // maxPrice 비교 및 갱신 및 트레일링 스탑 활성 여부 확인
+            if (isLessThan(buyPrice, stockPrice)) { // maxPrice 비교 및 갱신 및 트레일링 스탑 활성 여부 확인
                 if (isLessThan(maxPrice, stockPrice)) { // maxPrice 비교 및 갱신
                     maxPrice = stockPrice;
                     return;
                 }
 
-                BigDecimal increaseRate = calculateIncreaseRate(purchasePrice, maxPrice);
+                BigDecimal increaseRate = calculateIncreaseRate(buyPrice, maxPrice);
                 if (isLessThan(increaseRate, activationThreshold)) { // 트레일링 스탑 활성화 여부 확인
                     return;
                 }
@@ -64,7 +64,7 @@ public class StockPriceMessageListener implements MessageListener {
                 return;
             }
 
-            BigDecimal dropRate = calculateDropRate(purchasePrice, stockPrice);
+            BigDecimal dropRate = calculateDropRate(buyPrice, stockPrice);
             if (isLessThan(dipRate, dropRate)) {
                 // TODO 추가 매수 및
                 return;
